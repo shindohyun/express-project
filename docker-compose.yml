@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  vue-project:
+    # build
+    image: express-project:1.0
+    build: .
+
+    # run
+    image: express-project:1.0
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    container_name: express-project
