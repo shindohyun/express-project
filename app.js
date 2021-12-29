@@ -88,7 +88,7 @@ app.post('/upload/:productId/:type/:fileName', async (request, res) => {
   }))
   const data = request.body.data.slice(request.body.data.indexOf(';base64,') + 8)
   if(!fs.existsSync(dir)) {
-    fs.mkdirSync(dir)
+    fs.mkdirSync(dir, { recursive: true })
   }
   fs.writeFile(file, data, 'base64', async (error) => {
     await req.db('productImageInsert', [{
@@ -114,7 +114,7 @@ app.get('/download/:productId/:fileName', (request, res) => {
     fileName
   } = request.params
 
-  const filepath = `${__dirname}/upload/${productId}/${fileName}`
+  const filepath = `${__dirname}/uploads/${productId}/${fileName}`
   res.header('Content-Type', `image/${fileName.substring(fileName.lastIndexOf('.'))}`)
 
   if(!fs.existsSync(filepath)) res.send(404, {
