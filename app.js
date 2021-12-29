@@ -157,12 +157,12 @@ const req = {
       if(error) {
         if(error.code != 'ER_DUP_ENTRY') {
           console.log(error)
-          resolve({
-            error
-          })
-        } else {
-          resolve(rows)
         }
+        resolve({
+          error
+        })
+      } else {
+        resolve(rows)
       }
     }))
   }
