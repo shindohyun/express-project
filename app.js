@@ -41,13 +41,23 @@ fs.watchFile(__dirname + '/sql.js', (curr, prev) => {
 const db = {
   database: 'product_selling',
   connectionLimit: 10,
-  host: '192.168.16.2',
+  host: 'mariadb', // mariadb docker container name
   port: 3306,
   user: 'root',
   password: 'qwe123!@#'
 }
 
 const dbPool = require('mysql').createPool(db)
+
+app.get('/test', async (request, res) => {
+  try {
+    res.send("44")
+  } catch(err) {
+    res.status(500).send({
+      error: err
+    })
+  }
+})
 
 app.post('/api/login', async (request, res) => {
   try {

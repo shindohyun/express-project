@@ -1,0 +1,9 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+RUN npm install -g nodemon
+
+COPY . .
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

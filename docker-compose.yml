@@ -1,15 +1,18 @@
 version: "3.8"
 
 services:
-  vue-project:
-    # build
-    image: express-project:1.0
-    build: .
-
-    # run
-    image: express-project:1.0
+  express-project:
+    container_name: express-project
+    image: express-project
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - 3000:3000
     volumes:
       - .:/app
-    container_name: express-project
+
+networks:
+  default:
+    external:
+      name: default-network
